@@ -6,8 +6,8 @@ import ToDoList from './components/ToDoList'
 
 function App() {
   const [toDoList, setToDoList] = useState([])
-  const addToDoHandler= toDo => {
-    setToDoList([...toDoList, toDo])
+  const addToDoHandler= (toDo) => {
+    console.log([...toDoList, toDo])
   }
 
   return (
