@@ -3,10 +3,11 @@ export default function ToDoInput(props) {
     e.preventDefault()
     const toDo= {
       text: e.target[0].value,
-      completed: false,
+      isCompleted: false,
       id: Date.now()
     }
     props.addToDo(toDo)
+    e.target[0].value= ''
   }
   
   return (

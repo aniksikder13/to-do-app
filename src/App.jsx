@@ -6,15 +6,31 @@ import ToDoList from './components/ToDoList'
 
 function App() {
   const [toDoList, setToDoList] = useState([])
+
   const addToDoHandler= (toDo) => {
-    console.log([...toDoList, toDo])
+    setToDoList([...toDoList, toDo])
+  }
+
+  const completeHandler= (id, isComplete) => {
+    if (isComplete) {
+      setToDoList(toDoList.map(toDo => toDo.id === id? {...toDo, isComplete: true } : toDo))
+    } else {
+      setToDoList(toDoList.map(toDo => toDo.id === id? {...toDo, isComplete: false} : toDo))
+    }
+  }
+
+  const removeHandler= (id) => {
+    const filteredToDoList = toDoList.filter(toDo => toDo.id !== id)
+    setToDoList([...filteredToDoList])
   }
 
   return (
     <Fragment>
       <Header />
       <ToDoInput addToDo={addToDoHandler} />
-      <ToDoList toDoList= {toDoList} />
+      {
+        toDoList.length > 0 && <ToDoList toDoList= {toDoList} remove={removeHandler} complete={completeHandler} />
+      }
     </Fragment>
   )
 }
